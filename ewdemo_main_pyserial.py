@@ -36,6 +36,7 @@ print ("Opening COM port %s" % SERIAL_DEVICE)
 pt = serial.Serial(SERIAL_DEVICE, BAUDRATE, timeout = 0)
 sbp = io.TextIOWrapper(io.BufferedRWPair(pt, pt, 1),
                                newline = '\n',
+                               encoding='ascii',
                                line_buffering = True)
 
 def el_send(cmd, timeout=10):
@@ -106,6 +107,23 @@ def check_events():
                     print("message: " + str(response))
                     parse_event_led(response)
 
+def wait_event_gpio(timeout=30):
+    count = 0
+    while True:
+        count += 1
+        val = int(GPIO.input(PINOUT["event"]))
+
+        if val == 1:
+            print("--event pin is high")
+            return 0
+        time.sleep(1)
+
+        if count >= timeout:
+            print("return with timeout!!")
+            return 1
+        else:
+            return 0
+
 def check_event_gpio():
     while True:
         val = int(GPIO.input(PINOUT["event"]))
@@ -166,20 +184,27 @@ def signal_handler(sig, frame):
 
 def second_thread():
     time.sleep(2)
-
     print("Main::Bravo AWS ExpressLink starting...")
-    
-    rc = 0
+
+
+    if( 0 != wait_event_gpio()):
+        print("Event pin not found within timeout!")
+        sys.exit(1)
+
+    time.sleep(2)
+
+    #flush everything
+    #pt.readlines()
+
     print("Main::Initializing script...")
 
-    if config_device() == 0:
-        blink_led(3, 0.8)
-        rc = 0
-    else:
+    if config_device() != 0:
         blink_led(10, 0.05, 5)
-        rc = 1
+        print("cannot configure device!!!")
+        sys.exit()
+    else:
+        blink_led(3, 0.8)
 
-    if rc == 0:
         print("Main::Infinite loop starting")
 
         while True:
@@ -222,8 +247,7 @@ def second_thread():
                         time.sleep(INTERVAL)
                         continue
                     time.sleep(INTERVAL)
-    else:
-        print("cannot configure device!!!")
+
 
 
 if __name__ == '__main__':
@@ -231,12 +255,20 @@ if __name__ == '__main__':
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
 
-    print("set RST gpio high")
+    print("set RST HIGH")
     GPIO.setup(PINOUT["reset"], GPIO.OUT)
     GPIO.output(PINOUT["reset"], 1)
 
     GPIO.setup(PINOUT["led"], GPIO.OUT, initial=0)
 
+    print("set RST LOW...")
+    GPIO.output(PINOUT["reset"], 0)
+    time.sleep(2)
+
+    print("set RST HIGH")
+    GPIO.output(PINOUT["reset"], 1)
+
+    time.sleep(10)
 
     GPIO.setup(PINOUT["event"], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     GPIO.add_event_detect(PINOUT["event"], GPIO.RISING, callback=event_pin_callback)
