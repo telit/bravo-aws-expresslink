@@ -142,6 +142,7 @@ The Quick Connect demo application allows you to establish a connection with AWS
 The demo will connect to AWS IoT and give you a URL that you can use to visualize data flowing from the device to the cloud using AT+SEND commands. The demo will run for up to two minutes, and afterwards, you will be able to type `AT+SEND` commands yourself and see the data coming in on the visualizer. 
 
 Start QuickConnect
+
 ![Quick connect start](images/quickconnect_1.png)
 
 Enter "Y" to save an html file inside the working directory of QuickConnect
@@ -189,27 +190,37 @@ To create an IoT *Thing* and add it to your account we will need to retrieve the
 ![Your Thing name](images/thing_2.png)
 4.	In the terminal application type the command: `AT+CONF? Certificate pem`
 5.	Copy the returned string (a longer sequence of alphanumeric symbols), save into a text file on your host machine as **“ThingName.cert.pem”**. 
+
 ![Certificate sample](images/cert_1.png)
+
 6.	On the Configure device certificate page, select **Use my certificate**, choose **CA is not registered with AWS IoT**.
+
 ![Use My certificate](images/thing_3.png)
+
 7.	Under **Certificate**, select Choose file. Double click on “**ThingName.cert.pem**” file in step 5.
+
 ![Choose File](images/thing_4.png)
+
 8.	Under **Certificate Status**, select **Active**
 9.	Click **Next** to **Attach policies to certificate**.
-
 10.	Under **Secure**, select **Policies**. 
 11.	Click **Create** to Create a policy. Put policy name (e.g. IoTDevPolicy) and click **Advanced mode**. 
+
 ![Create Policy](images/policy_1.png)
+
 12.	Copy the below section into the console.
 
 `{ "Version": "2012-10-17", "Statement": [ { "Effect": "Allow", "Action": "*", "Resource": "*" } ] }`
+
 ![Policy creation](images/policy_2.png)
 
 > *NOTE – The examples in this document are intended only for dev environments.  All devices in your fleet must have credentials with privileges that authorize only intended actions on specific resources. The specific permission policies can vary for your use case. Identify the permission policies that best meet your business and security requirements.  For more information, refer to Example policies and Security Best practices*
 
 Click Save to complete the Thing creation
 13. Return to the **Create Single Thing** page and attach the policy
+
 ![Attach Policy](images/attach_policy1.png)
+
 14.	In the AWS IoT Console, choose **Settings**, copy your account *Endpoint* string in *Device data endpoint*.
 
 ![Endpoint](images/iot_settings_1.png)
@@ -312,9 +323,13 @@ You should see the module response `OK 1 version` to inform a module OTA firmwar
 ## Cannot connect
 
 1. Make sure you inserted the SIM
-2. Check SIM and make sure PIN is not required: `at+diag TELIT AT+CPIN=0
+2. Check SIM and make sure PIN is not required: `at+diag TELIT AT+CPIN?` should return `+CPIN: READY<CR>OK`
 
 ## QuickConnect is not working
 
-1. Make sure you've downloaded the right software, depending on your OR
-2. If the program terminates right after "AWS Session Initialized" make sure that your PC can establish a connection to AWS: after configuring your AWS CLI try `aws iot list-things`. If it doesn't work please check with your IT admin
+1. Make sure you've downloaded the right software, depending on your Operating System
+2. If the program terminates right after "AWS Session Initialized" make sure that your PC can establish a connection to AWS: after configuring your AWS CLI try `aws iot list-things`. If it doesn't work please check with your IT admin.
+
+If you cannot find an answer to your issue, please contact [TS-EMEA](mailto:ts-emea@telit.com)
+
+
