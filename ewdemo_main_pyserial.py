@@ -190,7 +190,7 @@ def signal_handler(sig, frame):
 
 def second_thread():
     time.sleep(2)
-    print("Main::Bravo AWS ExpressLink starting...")
+    print("Main::Bravo AWS IoT ExpressLink starting...")
 
 
     if( 0 != wait_event_gpio()):
@@ -217,7 +217,7 @@ def second_thread():
             """ make an infinite loop on connecting"""
             [rc, response] = el_send("AT+CONNECT", 20)
             if rc != 0:
-                print("Cannot connect to bravo AWS ExpressLink: " + response)
+                print("Cannot connect to bravo AWS IoT ExpressLink: " + response)
                 blink_led(5, 0.05, 5)
                 print("Retrying...")
                 time.sleep(15)

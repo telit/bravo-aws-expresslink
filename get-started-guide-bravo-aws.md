@@ -1,4 +1,4 @@
-# Getting started guide for Telit Cinterion Bravo rapid development kit with AWS ExpressLink
+# Getting started guide for Telit Cinterion Bravo rapid development kit with AWS IoT ExpressLink
 
 # Document information
 
@@ -21,7 +21,7 @@
 
 # Hardware Description
 
-Bravo development kit with AWS Expresslink LE910C1-WWXD comes with a variety of hardware components and features. 
+Bravo development kit with AWS IoT Expresslink LE910C1-WWXD comes with a variety of hardware components and features. 
 1. LE910C1-WWXD AWS LTE Cat.1 modem with pre-injected credentials and ExpressLink qualified firmware
 1. Embedded LTE Antenna
 1. Embedded Bosch Sensors
@@ -49,15 +49,15 @@ You can find the Bravo AWS product brief, the FAQ and the Quick start guide here
 
 Some of the guides and manuals require login access. Please register here https://dz.telit.com/register
 
-When you fill up the form, if you do not have a Telit Cinterion Point of Contact, please specify **Bravo AWS ExpressLink**
+When you fill up the form, if you do not have a Telit Cinterion Point of Contact, please specify **Bravo AWS IoT ExpressLink**
 
 ## Standard kit Contents
 
-Bravo AWS ExpressLink comes with a set of accessories to simplify the developer experience without the need of third party components.
+Bravo AWS IoT ExpressLink comes with a set of accessories to simplify the developer experience without the need of third party components.
 
 Content of the package:
 
-1. Bravo AWS ExpressLink Board, which includes LE910C1-WWXD AWS LTE Cat.1 Module
+1. Bravo AWS IoT ExpressLink Board, which includes LE910C1-WWXD AWS LTE Cat.1 Module
 1. External GNSS Antenna
 1. microUSB cable
 1. SIM card
@@ -65,11 +65,12 @@ Content of the package:
 
 ## User Provided items
 
-You need to connect the Bravo with AWS ExpressLink to a host processor.
+You need to connect the Bravo with AWS IoT ExpressLink to a host processor.
 As a mere example you can use:
 * Raspberry Pi / Pi Zero
 * Arduino
 * PC (Windows/Linux/Mac)
+* Power adapter, barrel center positive 2.1 mm / 5mm with 10W min e.g. https://www.amazon.com/SoulBay-Universal-Multi-Voltage-Selectable-Electronics/dp/B01N2K48HR/
 
 
 
@@ -81,7 +82,7 @@ Additional MikroBus sensors and peripherals to complement the existing range of 
 
 # Set up your hardware
 
-In this get started example we suggest to use a PC for a quick check of the capabilities of Bravo AWS ExpressLink. 
+In this get started example we suggest to use a PC for a quick check of the capabilities of Bravo AWS IoT ExpressLink. 
 
 However, any other external processor can be connected to the Bravo board: Follow the Bravo get started guide to configure appropriately.
 Please refer to please see https://www.telit.com/bravo-evk-download-zone/ doc: Telit_Bravo_Quick_Start_Guide for full details on how to connect to the Bravo Board
@@ -89,7 +90,7 @@ Please refer to please see https://www.telit.com/bravo-evk-download-zone/ doc: T
 
 1. plug the SIM card provided, which has (almost) global coverage. If you are willing to use a different SIM card please make sure your region/country supports LTE Cat.1 connectivity and SIM PIN is disabled
 2. connect the Bravo board to your PC
-3. connect the power supply (5-24VDC min 600mA) 
+3. connect the power supply  
 4. press and hold for 5 seconds the on/off button 
 5. on Windows, take note of the com ports and make sure you connect to the first com port available. Please see https://www.telit.com/bravo-evk-download-zone/ doc: Telit_Bravo_Quick_Start_Guide section 3
 
@@ -97,7 +98,7 @@ Please refer to please see https://www.telit.com/bravo-evk-download-zone/ doc: T
 
 # Set up host machine
 
-To establish a serial connection between your host machine and the *Bravo AWS ExpressLink*, you must install the USB to UART Bridge Virtual Communication Port drivers. You can download these drivers from [Telit IoT developer Resources - USB Drivers](https://www.telit.com/evkevb-drivers/). For more information, see the driver user guide included in the zip archive. 
+To establish a serial connection between your host machine and the *Bravo AWS IoT ExpressLink*, you must install the USB to UART Bridge Virtual Communication Port drivers. You can download these drivers from [Telit IoT developer Resources - USB Drivers](https://www.telit.com/evkevb-drivers/). For more information, see the driver user guide included in the zip archive. 
 Open a terminal application for your host machine (e.g., TeraTerm for Windows, CoolTerm for Mac) and select the port corresponding to the evaluation kit. Configure the terminal application as follows:
 | Parameter        | value         |
 | -----------------|---------------|
@@ -107,7 +108,7 @@ Open a terminal application for your host machine (e.g., TeraTerm for Windows, C
 | Stop:            | 1             |
 | Flow control:	   | None          |
 | Local Echo:      | Yes           |
-| ~~End of Line:~~ | ~~Line Feed~~ |
+
 
 For a quick check, in the terminal window type: `AT` followed by `<return>`. If you receive the answer `OK`, Congratulations! You have successfully connected the evaluation kit to your host machine.
 
@@ -150,7 +151,7 @@ Enter "Y" to save an html file inside the working directory of QuickConnect
 
 
 
-Click on the link, a browser window will open. This page, called **Quick Connect Dashboard**, will be populated with data sent from your Bravo AWS ExpressLink
+Click on the link, a browser window will open. This page, called **Quick Connect Dashboard**, will be populated with data sent from your Bravo AWS IoT ExpressLink
 
 ![Click Me page - Dashboard](images/quickconnect_2.png)
 
@@ -214,7 +215,7 @@ To create an IoT *Thing* and add it to your account we will need to retrieve the
 
 ![Policy creation](images/policy_2.png)
 
-> *NOTE – The examples in this document are intended only for dev environments.  All devices in your fleet must have credentials with privileges that authorize only intended actions on specific resources. The specific permission policies can vary for your use case. Identify the permission policies that best meet your business and security requirements.  For more information, refer to Example policies and Security Best practices*
+> *NOTE – The examples in this document are intended only for dev environments.  All devices in your fleet must have credentials with privileges that authorize only intended actions on specific resources. The specific permission policies can vary for your use case. Identify the permission policies that best meet your business and security requirements.  For more information, refer to [Example policies](https://docs.aws.amazon.com/iot/latest/developerguide/example-iot-policies.html) and [Security Best practices](https://docs.aws.amazon.com/iot/latest/developerguide/security-best-practices.html)*
 
 Click Save to complete the Thing creation
 13. Return to the **Create Single Thing** page and attach the policy
@@ -279,7 +280,7 @@ You will receive the message `OK Hello from AWS IoT console`
 
 ## Prerequisites
 
-You should have received a firmware image signed by the Telit Cinterion. Along with the firmware image, you should receive additional signing metadata such as:
+Download the latest signed image firmware from [Telit Cinterion Download Zone](https://telit.com/download-zone). Along with the firmware image, you will download additional signing metadata such as:
 
 1.	Signature hashing algorithm used (Example: SHA-256)
 2.	Signature encryption algorithm used (Example: ECDSA)
@@ -291,34 +292,17 @@ For further information please check [Telit Cinterion Download Zone](https://tel
 
 ## Creating a Firmware Update job in AWS IoT
 
-1.	Open AWS IoT Console. Select Manage then select Jobs.  Choose Create job, select Create FreeRTOS OTA Update Job, click Next.
-2.	Provide a job name which is unique within your AWS account. Provide an optional description. Click Next.
-3.	From Devices to update dropdown choose the thing name with which the Express Link is registered with the account. Select MQTT as the protocol to transfer, and unselect HTTP if selected.
-4.	Choose Use my custom signed file which will display a form to be filled. Use the details from the prerequisites to fill the form.
-5.	In the signature field provide the base64 encoded signature for the image. From the Original hashing algorithm drop down, select the hashing algorithm provided by the manufacturer. From the Original encryption algorithm drop down, select the encryption algorithm provided by the manufacturer. For Path name of code signing certificate on device, fill the box with path name if any provided by the manufacturer. If path name is not provided then you can just enter NA.
-6.	Select Upload a new file, click on Choose file and upload the image received from the manufacturer. Select Create S3 bucket for the new uploaded image and proceed with creating a new bucket. If needed you can also choose an existing bucket in your account by selecting Browse S3 option.
-7.	Under Path Name of file on device you can enter NA if the image is not targeted as an executable file within a filesystem.
-8.	Under File type drop down select a value (default to 0) to signify it’s an express link firmware update as opposed to a host firmware update.
-9.	Choose the OTA update role created above from role dropdown under IAM role section. Click Next.
-10.	Click Create Job. On successful creation it should list the job name and state as in progress.
+ Please refer to the AWS IoT ExpressLink [Getting Started Guide - Create a firmware update job in AWS IoT](https://docs.aws.amazon.com/iot-expresslink/latest/gettingstartedguide/elgsg-setup-ota-update.html#elgsg-setup-ota-update-create)
 
 
 ## Monitoring and Applying new firmware update for ExpressLink
 
-1.	Express link module polls for firmware update jobs, receives and validates a job, and enters a state waiting for update to be accepted.
-2.	Host application receives an OTA event indicating a new firmware image is available for ExpressLink. Host application can query the state of the job using the command `AT+OTA?`. 
-You should see the module response `OK 1 version` to inform a module OTA firmware update was proposed.
-3.	Host application can accept a new firmware update for by issuing command `AT+OTA ACCEPT`.
-4.	ExpressLink should now start downloading the firmware update from cloud. Host can monitor the state of the job using `AT+OTA?`.
-5.	On download completion and successful image signature validation, host receives an event to apply the new image.
-6.	Host application can apply the new image by issuing the command `AT+OTA APPLY`.
-7.	Express Link now reboots and boots up with the new image. Host receives a `STARTUP` event indicating the new image is booted. To see the event, issuing `AT+EVENT?`. (Notes: the event queue is shown up on the FIFO order, you may have to issue `AT+EVENT?` command multiple times, depending on how many events are previously on the queue).
-8.	Host application can connect back to the AWS IoT by issuing `AT+CONNECT`.
-9.	ExpressLink should now connect to AWS IoT, complete the self-test and mark the image as valid preventing any further rollback to old image.
-10.	Going back to the AWS IoT console, job status should be marked as completed and succeeded.
+Please refer to the AWS IoT ExpressLin [Getting Started Guide - Monitor and Apply a new firmware update for ExpressLink](https://docs.aws.amazon.com/iot-expresslink/latest/gettingstartedguide/elgsg-setup-ota-update.html#elgsg-setup-ota-update-monitor)
 
 
 # Troubleshooting
+
+> Please make sure you have checked the [AWS IoT ExpressLink Documentation](https://docs.aws.amazon.com/iot-expresslink/) and [AWS IoT ExpressLink Examples and Training Material](https://github.com/aws/iot-expresslink)
 
 ## Cannot connect
 
