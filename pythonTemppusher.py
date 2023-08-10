@@ -9,10 +9,10 @@ import json
 import time
 
 # Define ENDPOINT, CLIENT_ID, PATH_TO_CERTIFICATE, PATH_TO_PRIVATE_KEY, PATH_TO_AMAZON_ROOT_CA_1, MESSAGE, TOPIC, and RANGE
-ENDPOINT = "a2lfhk74nngow4-ats.iot.eu-west-1.amazonaws.com"
+ENDPOINT = "YOUR_ENDPOINT.amazonaws.com"
 CLIENT_ID = "telit-demo-1"
-PATH_TO_CERTIFICATE = "certificates/telit-demo-1/6a3612923c6be8a7cac0e28eeb056bbf5fdd88c8ed1e861d22cebf1cc52e0d30-certificate.pem.crt"
-PATH_TO_PRIVATE_KEY = "certificates/telit-demo-1/6a3612923c6be8a7cac0e28eeb056bbf5fdd88c8ed1e861d22cebf1cc52e0d30-private.pem.key"
+PATH_TO_CERTIFICATE = "certificates/YOUR_THING-certificate.pem.crt"
+PATH_TO_PRIVATE_KEY = "certificates/YOUR_THING-private.pem.key"
 PATH_TO_AMAZON_ROOT_CA_1 = "certificates/AmazonRootCA1.pem"
 
 TOPIC = "TempCheckerTopic"
